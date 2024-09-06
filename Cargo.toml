@@ -2,6 +2,8 @@
 name = "example-webserver-rs"
 version = "0.1.0"
 edition = "2021"
+description = "Building Rust webserver application with Axum for fun"
+license = "Apache-2.0"
 
 [dependencies]
 axum = "0.7.5"

@@ -1,7 +1,15 @@
 # Example-webserver-rs
 
 Project aims for setting up basic webserver functionality written in Rust and providing a few 
-ready-to-use endpoints. It serves for learning purposes and figuring out Rust libraries ecosystem.
+ready-to-use endpoints. It serves for learning purposes and figuring out Rust libraries ecosystem. Implemented
+with Axum framework.
+
+## Implemented
+- Routing
+- GET/POST requests
+- parsing JSON request/response contents
+- FromRequest/IntoResponse traits
+- shared state with Clone trait or Atomic Reference Counting
 
 ## Examples
 
@@ -15,15 +23,20 @@ curl -X GET 127.0.0.1:3000
 curl -X GET 127.0.0.1:3000/json
 ```
 
-3. POST /append
+3. GET /json-counter
+```shell
+curl -X GET 127.0.0.1:3000/json-counter
+```
+
+4. POST /append
 ```shell
 curl \
-    -X POST 127.0.0.1:3000/example \
+    -X POST 127.0.0.1:3000/append \
     -H "Content-Type: application/json" \
     -d '{"data": "hello"}'
 ```
 
-4. GET /rnd
+5. GET /rnd
 ```shell
 curl -X GET 127.0.0.1:3000/rnd
 ```
