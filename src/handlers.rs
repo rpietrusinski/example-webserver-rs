@@ -21,9 +21,7 @@ pub async fn get_json() -> Json<Value> {
 pub async fn append_to_string(Json(mut state): Json<RequestJson>) -> Json<ResponseJson> {
     state.data.push_str(" world!");
     println!("Success!!");
-    Json(ResponseJson {
-        output: state.data,
-    })
+    Json(ResponseJson { output: state.data })
 }
 
 ///Function generates single random number and returns it as `String`. `String` is viable output
