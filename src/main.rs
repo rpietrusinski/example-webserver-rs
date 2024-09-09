@@ -3,7 +3,7 @@ use axum::{
     Router,
 };
 use example_webserver_rs::handlers::{
-    append_to_string, get_json, get_json_counter, get_random_number,
+    append_to_string, get_country, get_json, get_json_counter, get_random_number,
 };
 use example_webserver_rs::structs::AppState;
 use std::sync::{Arc, Mutex};
@@ -17,6 +17,7 @@ async fn main() {
         .route("/json", get(get_json))
         .route("/json-counter", get(get_json_counter))
         .route("/rnd", get(get_random_number))
+        .route("/country", get(get_country))
         .with_state(state);
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();

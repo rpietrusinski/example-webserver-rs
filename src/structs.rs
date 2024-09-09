@@ -31,3 +31,22 @@ impl AppState {
         self.counter += 1;
     }
 }
+
+///Used in parsing RestCountries API
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Country {
+    name: Name,
+}
+
+///Used in parsing RestCountries API
+#[derive(Serialize, Deserialize, Debug)]
+pub struct Name {
+    common: String,
+    official: String,
+}
+
+///Used in parsing RestCountries API as query parameters
+#[derive(Deserialize, Debug)]
+pub struct CountryQueryParams {
+    pub name: String,
+}

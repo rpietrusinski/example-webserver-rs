@@ -40,3 +40,8 @@ curl \
 ```shell
 curl -X GET 127.0.0.1:3000/rnd
 ```
+
+6. GET /country
+```shell
+curl -X GET "127.0.0.1:3000/country?name=usa"
+```

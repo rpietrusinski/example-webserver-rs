@@ -1,9 +1,12 @@
 //! In axum a “handler” is an async function that accepts zero or more “extractors”
 //! as arguments and returns something that can be converted into a response.
 use crate::structs::AppState;
-use crate::structs::{RequestJson, ResponseJson};
-use axum::extract::State;
-use axum::Json;
+use crate::structs::{Country, CountryQueryParams, RequestJson, ResponseJson};
+use axum::{
+    extract::{Query, State},
+    http::StatusCode,
+    Json,
+};
 use rand::Rng;
 use serde_json::{json, Value};
 use std::sync::{Arc, Mutex};
@@ -45,4 +48,31 @@ pub async fn get_random_number() -> String {
     let mut rng = rand::thread_rng();
     let y: f64 = rng.random();
     y.to_string()
+}
+
+///Function calls external RestCountries API and extracts information about given country. Function
+/// expects query parameter in form of `?name=<country_name>`.
+pub async fn get_country(
+    query_params: Query<CountryQueryParams>,
+) -> Result<Json<Country>, StatusCode> {
+    let queried_name = query_params.0.name;
+
+    let response = match reqwest::get(format!(
+        "https://restcountries.com/v3.1/name/{queried_name}"
+    ))
+    .await
+    {
+        Ok(x) => x,
+        Err(_e) => return Err(StatusCode::SERVICE_UNAVAILABLE),
+    };
+
+    let mut parsed_vec = match response.json::<Vec<Country>>().await {
+        Ok(x) => x,
+        Err(_e) => return Err(StatusCode::UNPROCESSABLE_ENTITY),
+    };
+
+    match parsed_vec.pop() {
+        Some(x) => Ok(Json(x)),
+        None => Err(StatusCode::BAD_REQUEST),
+    }
 }
