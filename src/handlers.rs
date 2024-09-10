@@ -40,7 +40,6 @@ pub async fn get_json_counter(State(s): State<Arc<Mutex<AppState>>>) -> Result<S
 /// body the input json will be parsed to `state` object.
 pub async fn append_to_string(Json(mut payload): Json<RequestJson>) -> Json<ResponseJson> {
     payload.data.push_str(" world!");
-    println!("Success!!");
     Json(ResponseJson {
         output: payload.data,
     })

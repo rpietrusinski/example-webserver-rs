@@ -5,11 +5,18 @@ ready-to-use endpoints. It serves for learning purposes and figuring out Rust li
 with Axum framework.
 
 ## Implemented
-- Routing
-- GET/POST requests
-- parsing JSON request/response contents
-- FromRequest/IntoResponse traits
-- shared state with Clone trait or Atomic Reference Counting
+From this project one can learn the following concepts:
+- How to create HTTP listener and handle incoming traffic
+- How to create endpoints executing GET/POST requests
+- How to parse JSON payloads and process them
+- How to share state between endpoints (either with Clone Trait or Atomic Reference Counting)
+- How to parse query parameters
+- What are requirements for Handler functions (FromRequest/IntoResponse traits, Extractors)
+- How to call another external REST API from inside our endpoint, parse the results and return to user
+
+## Run
+Command `cargo run` will build the project and start the webserver on port `3000`. Below are the commands you can 
+execute against webserver.
 
 ## Examples
 
