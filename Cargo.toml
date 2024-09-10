@@ -1,6 +1,6 @@
 [package]
 name = "example-webserver-rs"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "Building Rust webserver application with Axum for fun"
 license = "Apache-2.0"
